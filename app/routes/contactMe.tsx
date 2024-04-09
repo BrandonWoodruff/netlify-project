@@ -18,7 +18,7 @@ const ContactMe: React.FC = () => {
     formData.append('email', email);
     formData.append('message', message);
 
-    fetch("/submit.php", {
+    fetch("~/components/submit.php", {
       method: "POST",
       body: formData
     })
