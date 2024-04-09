@@ -6,6 +6,7 @@ const ContactMe: React.FC = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+  const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -13,22 +14,33 @@ const ContactMe: React.FC = () => {
     console.log('Name:', name);
     console.log('Email:', email);
     console.log('Message:', message);
-    const myForm = event.target;
-  const formData = new FormData(myForm);
-  
-  fetch("/", {
-    method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: new URLSearchParams(formData).toString(),
-  })
-    .then(() => console.log("Form successfully submitted"))
-    .catch((error) => alert(error));
-};
 
-document
-  .querySelector("form")
-  .addEventListener("submit", handleSubmit);
+    // Submit form
+    const myForm = e.target as HTMLFormElement;
+    const formDataToSend = new FormData(myForm);
+
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams(formDataToSend).toString(),
+    })
+    .then(() => {
+      console.log("Form successfully submitted");
+      setSubmitted(true); // Set submitted state to true
+    })
+    .catch((error) => alert(error));
   };
+
+  if (submitted) {
+    return (
+      <div className="relative z-10 text-black text-center">
+        <header><Head /></header>
+        <h1 className="text-3xl font-bold text-white mb-4">Thank You!</h1>
+        <p className="text-white">Your message has been successfully submitted.</p>
+        <footer className='text-white'><Foot /></footer>
+      </div>
+    );
+  }
 
   return (
     <div className="relative z-10 text-black text-center">

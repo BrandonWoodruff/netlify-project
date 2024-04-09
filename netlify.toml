@@ -14,3 +14,19 @@ for = "/build/*"
 [headers.values]
 
 "Cache-Control" = "public, max-age=31560000, immutable"
+
+[[plugins]]
+  package = "@netlify/plugin-functions"
+
+[build]
+  functions = "functions/"
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+# Replace with your real email address
+[build.environment]
+  EMAIL_NOTIFICATION_TO = "b,w132000@gmail.com"
+
