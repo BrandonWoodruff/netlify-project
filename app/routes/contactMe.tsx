@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom'; // Import useHistory hook
 import Head from '~/components/_header';
 import Foot from '~/components/_footer';
 
@@ -6,62 +7,54 @@ const ContactMe: React.FC = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
-  const [submitted, setSubmitted] = useState(false);
+  const history = useHistory(); // Initialize useHistory hook
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted!');
-    console.log('Name:', name);
-    console.log('Email:', email);
-    console.log('Message:', message);
+    
+    const formData = new FormData();
+    formData.append('name', name);
+    formData.append('email', email);
+    formData.append('message', message);
 
-    // Submit form
-    const myForm = e.target as HTMLFormElement;
-    const formDataToSend = new FormData(myForm);
-
-    fetch("/", {
+    fetch("/submit.php", {
       method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams(formDataToSend).toString(),
+      body: formData
     })
-    .then(() => {
-      console.log("Form successfully submitted");
-      setSubmitted(true); // Set submitted state to true
+    .then(response => {
+      if (response.ok) {
+        console.log("Form successfully submitted");
+        setName('');
+        setEmail('');
+        setMessage('');
+        history.push('/thank-you'); // Redirect to Thank You page
+      } else {
+        throw new Error("Form submission failed");
+      }
     })
-    .catch((error) => alert(error));
+    .catch(error => {
+      console.error("Error submitting form:", error);
+      // Handle error, show error message to user, etc.
+    });
   };
-
-  if (submitted) {
-    return (
-      <div className="relative z-10 text-black text-center">
-        <header><Head /></header>
-        <h1 className="text-3xl font-bold text-white mb-4">Thank You!</h1>
-        <p className="text-white">Your message has been successfully submitted.</p>
-        <footer className='text-white'><Foot /></footer>
-      </div>
-    );
-  }
 
   return (
     <div className="relative z-10 text-black text-center">
       <header><Head /></header>
       <h1 className="text-3xl font-bold text-white mb-4">Contact Me</h1>
       <br></br>
-      <h2 className="text-white">You can also reach me at 801-462-5879 or brandonwoodywoodruff@gmail.com</h2>
-
-      <form name="contact" method="POST" netlify>
-        <input type="hidden" name="form-name" value="contact" />
+      <form name="contact" onSubmit={handleSubmit}>
         <div className="mb-4">
           <label className="block text-lg text-white mb-2">Your Name:</label>
-          <input type="text" name="name" className="input-box" onChange={(e) => setName(e.target.value)} />
+          <input type="text" name="name" className="input-box" value={name} onChange={(e) => setName(e.target.value)} />
         </div>
         <div className="mb-4">
           <label className="block text-white text-lg mb-2">Your Email:</label>
-          <input type="email" name="email" className="input-box" onChange={(e) => setEmail(e.target.value)} />
+          <input type="email" name="email" className="input-box" value={email} onChange={(e) => setEmail(e.target.value)} />
         </div>
         <div className="mb-4">
           <label className="block text-white text-lg mb-2">Message:</label>
-          <textarea name="message" className="input-box" onChange={(e) => setMessage(e.target.value)}></textarea>
+          <textarea name="message" className="input-box" value={message} onChange={(e) => setMessage(e.target.value)}></textarea>
         </div>
         <button type="submit" className="bg-green-500 text-white py-2 px-4 rounded-lg text-lg hover:bg-green-600">Send</button>
       </form>
