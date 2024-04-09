@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#skills-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 1rem;
+}
+
+#skills-content ul li a:hover {
+  color: #b794f4;
+  
+}
+
+.header {
+  display: block;
+}
