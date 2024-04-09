@@ -10,7 +10,7 @@ export function Header() {
         <a href='/'><Gif /></a>
       </div>
       {/* Right side items */}
-      <div className="flex items-center space-x-4">
+      <div className="flex items-center text-white space-x-4">
         <nav className="flex"> {/* Add flex class here */}
           <a href="https://www.linkedin.com/in/brandon-woody-woodruff/" aria-label="Brandon Woodruff on LinkedIn" target="_blank" rel="noopener" className="mr-4">
             <svg className="h-10 w-10 hover:text-gray-400" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
