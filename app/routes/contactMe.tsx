@@ -47,6 +47,8 @@ const ContactMe: React.FC = () => {
       <header><Head /></header>
       <h1 className="text-3xl font-bold text-white mb-4">Contact Me</h1>
       <br></br>
+      <h2 className="text-white">You can also reach me at 801-462-5879 or brandonwoodywoodruff@gmail.com</h2>
+
       <form name="contact" method="POST" netlify>
         <input type="hidden" name="form-name" value="contact" />
         <div className="mb-4">
