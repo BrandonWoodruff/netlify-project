@@ -16,20 +16,21 @@ const ContactMe: React.FC = () => {
   };
 
   return (
-    <div className="relative z-10 text-white text-center">
+    <div className="relative z-10 text-black text-center">
       <header><Head /></header>
-      <h1 className="text-3xl font-bold mb-4">Contact Me</h1>
+      <h1 className="text-3xl font-bold text-white mb-4">Contact Me</h1>
+      <br></br>
       <form name="contact" method="POST" data-netlify="true" action="routes/success" onSubmit={handleSubmit}>
         <div className="mb-4">
-          <label className="block text-lg mb-2">Your Name:</label>
+          <label className="block text-lg text-white mb-2">Your Name:</label>
           <input type="text" name="name" className="input-box" onChange={(e) => setName(e.target.value)} />
         </div>
         <div className="mb-4">
-          <label className="block text-lg mb-2">Your Email:</label>
+          <label className="block text-white text-lg mb-2">Your Email:</label>
           <input type="email" name="email" className="input-box" onChange={(e) => setEmail(e.target.value)} />
         </div>
         <div className="mb-4">
-          <label className="block text-lg mb-2">Message:</label>
+          <label className="block text-white text-lg mb-2">Message:</label>
           <textarea name="message" className="input-box" onChange={(e) => setMessage(e.target.value)}></textarea>
         </div>
         <button type="submit" className="bg-green-500 text-white py-2 px-4 rounded-lg text-lg hover:bg-green-600">Send</button>
