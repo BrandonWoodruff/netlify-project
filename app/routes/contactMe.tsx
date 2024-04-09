@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom'; // Import useHistory hook
 import Head from '~/components/_header';
 import Foot from '~/components/_footer';
+import { useNavigate } from 'react-router-dom'; // Import useHistory hook from react-router-dom package
+
 
 const ContactMe: React.FC = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
-  const history = useHistory(); // Initialize useHistory hook
+  const history = useNavigate(); // Initialize useHistory hook
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

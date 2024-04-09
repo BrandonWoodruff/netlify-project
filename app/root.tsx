@@ -11,6 +11,7 @@ import Header from "~/components/_header";
 import Footer from "~/components/_footer";
 import Background from "~/components/_background";
 
+
 export let links: LinksFunction = () => {
   return [{ rel: "stylesheet", href: stylesheet }];
 }

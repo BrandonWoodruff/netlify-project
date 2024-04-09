@@ -5,7 +5,6 @@ import Gif from '~/components/gif';
 import { ExternalLinkIcon } from '@heroicons/react/outline';
 import ContactMe from '~/routes/contactMe';
 import stylesheet from "~/tailwind.css?url";
-import { useHistory } from 'react-router-dom'; // Import useHistory hook
 
 
 export let links: LinksFunction = () => {
